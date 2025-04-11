@@ -18,7 +18,7 @@ const MyOrders = ({ reloadTrigger }) => {
           return;
         }
 
-        let url = '/api/orders/';
+        let url = '/orders/';
         let allOrders = [];
 
         while (url) {
