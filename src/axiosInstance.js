@@ -1,6 +1,7 @@
 import axios from 'axios';
 
 const axiosInstance = axios.create();
+const API = process.env.REACT_APP_API_BASE_URL;
 
 // Добавляем Authorization в каждый запрос, если токен есть
 axiosInstance.interceptors.request.use(
@@ -26,7 +27,7 @@ axiosInstance.interceptors.response.use(
 
       if(refreshToken) {
         try {
-          const response = await axios.post('http://localhost:8000/api/users/token/refresh/', {
+          const response = await axios.post(`${API}/users/token/refresh/`, {
             refresh: refreshToken,
           });
 
