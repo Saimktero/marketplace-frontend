@@ -3,6 +3,8 @@ import axiosInstance from '../axiosInstance';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
+const API = process.env.REACT_APP_API_BASE_URL;
+
 const MyOrders = ({ reloadTrigger }) => {
   const [orders, setOrders] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -18,7 +20,7 @@ const MyOrders = ({ reloadTrigger }) => {
           return;
         }
 
-        let url = '/orders/';
+        let url = `${API}/orders/`;
         let allOrders = [];
 
         while (url) {
