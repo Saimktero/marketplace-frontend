@@ -8,7 +8,7 @@ export const getProducts = async (page = 1) => {
   const response = await axiosInstance.get(`${API}/products/?page=${page}`);
 
   // Достаём нужные данные из ответа
-  const { count, next, previous, results } = respose.data;
+  const { count, next, previous, results } = response.data;
 
   // Возвращаем красивый объект
   return {
