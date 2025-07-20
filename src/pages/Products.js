@@ -2,6 +2,7 @@ import ProductList from '../components/ProductList';
 import Pagination from '../components/Pagination';
 
 function Products({ products, nextPage, prevPage, loadPage, addToCart }) {
+  console.log('Прилетели продукты в Products:', products); // отладка
   return (
     <div>
       <h2>Каталог товаров</h2>
