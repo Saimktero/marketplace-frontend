@@ -1,7 +1,7 @@
 import Product from './Product';
 
 function ProductList({ products, addToCart }) {
-  console.log('Прилетели товары в ProductList:', products); // отладка
+  if (!products) return <p>Загрузка товаров...</p>;
   return (
     <div>
       <ul>
@@ -16,7 +16,7 @@ function ProductList({ products, addToCart }) {
         ) : (
           <p>Загрузка товаров...</p>
         )}
-       </ul>
+      </ul>
     </div>
   );
 }
