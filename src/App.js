@@ -81,6 +81,7 @@ function App() {
   useEffect(() => {
     getProducts().then(data => {
       if (data) {
+        console.log('Получены товары:', data);  // для отладки
         setProducts(data); // ← Сохраняем ВЕСЬ объект, не только results
         setNextPage(data.next);
         setPrevPage(data.previous);
