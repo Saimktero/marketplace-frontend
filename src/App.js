@@ -79,11 +79,12 @@ function App() {
   };
 
   useEffect(() => {
-    loadProducts();
     getProducts().then(data => {
-      setProducts(data.results);
-      setNextPage(data.next);
-      setPrevPage(data.previous);
+      if (data) {
+        setProducts(data); // ← Сохраняем ВЕСЬ объект, не только results
+        setNextPage(data.next);
+        setPrevPage(data.previous);
+      }
     });
   }, []);
 
