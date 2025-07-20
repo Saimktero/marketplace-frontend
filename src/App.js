@@ -72,7 +72,7 @@ function App() {
   const loadProducts = async () => {
     try {
       const response = await axiosInstance.get(`${API}/products/`);
-      setProducts(response.data.results);
+      setProducts(response.data);
     } catch (error) {
       console.error('Ошибка загрузки товаров:', error);
     }
