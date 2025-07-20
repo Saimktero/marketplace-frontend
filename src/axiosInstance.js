@@ -16,7 +16,7 @@ axiosInstance.interceptors.request.use(
 );
 
 // Обработка ответа и автообновление токена при 401
-axiosInstance.interceptors.response.use(
+axiosInstance.interceptors.response.use(  
   response => response,
   async error => {
     const originalRequest = error.config;
