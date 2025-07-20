@@ -1,6 +1,7 @@
 import Product from './Product';
 
 function ProductList({ products, addToCart }) {
+  console.log('Прилетели товары в ProductList:', products); // отладка
   return (
     <div>
       <ul>
