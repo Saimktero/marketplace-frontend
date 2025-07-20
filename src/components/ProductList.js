@@ -4,17 +4,17 @@ function ProductList({ products, addToCart }) {
   return (
     <div>
       <ul>
-        {products.length > 0 ? (
-          (products?.results || []).map(product => (
+        {products?.results?.length > 0 ? (
+          products.results.map(product => (
             <Product
-             key={product.id}
-             name={product.name}
-             addToCart={() => addToCart(product)}
-             />
+              key={product.id}
+              name={product.name}
+              addToCart={() => addToCart(product)}
+            />
           ))
-         ) : (
-           <p>Загрузка товаров...</p>
-         )}
+        ) : (
+          <p>Загрузка товаров...</p>
+        )}
        </ul>
     </div>
   );
