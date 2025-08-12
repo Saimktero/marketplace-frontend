@@ -1,70 +1,60 @@
-# Getting Started with Create React App
+О проекте: 
+SPA на React: каталог товаров, корзина, заказы пользователя, авторизация по JWT, цифровая пагинация, уведомления.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Стек:
+React, React Router, axios, react‑toastify. Сборка: CRA (create‑react‑app). Деплой: Railway Static Site.
 
-## Available Scripts
 
-In the project directory, you can run:
+Архитектура проекта:
 
-### `npm start`
+marketplace-frontend/
+├─ build/                     # продакшн‑сборка (генерируется npm run build)
+├─ node_modules/              # зависимости (в Git не храним)
+├─ public/
+│  └─ index.html              # HTML‑шаблон для SPA
+├─ src/
+│  ├─ api/
+│  │  └─ products.js          # функции работы с товарами (getProducts и т.п.)
+│  ├─ components/
+│  │  ├─ Cart.js              # компонент корзины (отображение, изменение qty)
+│  │  ├─ LoginForm.js         # форма входа (отправка cred, обработка ошибок)
+│  │  ├─ MyOrders.js          # список заказов пользователя (пагинация, next)
+│  │  ├─ NavBar.js            # навигация (isAuthenticated, logout)
+│  │  ├─ Pagination.js        # UI‑компонент пагинации (исп. usePagination)
+│  │  ├─ Product.js           # карточка товара
+│  │  └─ ProductList.js       # список товаров
+│  ├─ pages/
+│  │  ├─ Catalog.js           # страница каталога (интегр. пагинацию, загрузку)
+│  │  ├─ Home.js              # главная
+│  │  └─ Login.js             # страница логина (оборачивает LoginForm)
+│  ├─ App.css                 # общие стили
+│  ├─ App.js                  # корневой компонент (роуты, ToastContainer)
+│  ├─ axiosInstance.js        # axios с базовым URL, токеном и refresh‑перехватчиком
+│  ├─ index.css               # базовые стили
+│  ├─ index.js                # входная точка React (render <App />)
+│  ├─ logo.svg                # ассеты
+│  ├─ reportWebVitals.js      # метрики (CRA)
+│  └─ setupTests.js           # тестовая конфигурация (CRA)
+├─ .env                       # переменные окружения фронта (не коммитить в паблик)
+├─ .gitignore                 # исключения Git
+├─ package.json               # зависимости и npm‑скрипты
+├─ package-lock.json          # lock‑файл npm
+├─ README.md                  # этот файл
+└─ static.json                # (опционально) подсказки статическому хосту/rewrites
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+Ключевые узлы:
+axiosInstance.js
+Добавляет Authorization: Bearer <access> ко всем запросам; при 401 запрашивает /users/token/refresh/, повторяет оригинальный запрос, при неудаче — чистит токены и редиректит на /login.
+Pagination.js + usePagination
+Рендерит цифровую пагинацию. Хук возвращает массив страниц и DOTS; компонент мапит это в кнопки.
+Cart.js / ProductList.js / MyOrders.js
+Основные точки пользовательского потока: добавление в корзину, оформление заказа, просмотр заказов.
 
-### `npm test`
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Маршруты SPA:
+/ — главная
+/products — каталог товаров
+/cart — корзина
+/my-orders — заказы пользователя
+/login — вход
