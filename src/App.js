@@ -108,18 +108,7 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/catalog" element={<Catalog />} />
             <Route path="/login" element={<Login loadProducts={loadProducts} />} />
-            <Route
-              path="/products"
-                element={
-                  <Products
-                    products={products}
-                    nextPage={nextPage}
-                    prevPage={prevPage}
-                    loadPage={loadPage}
-                    addToCart={addToCart}
-                  />
-                }
-             />
+            <Route path="/products" element={<Products />} />
             <Route path='/cart' element={<Cart cartItems={cartItems} handleCheckout={handleCheckout} />} />
             <Route path='/my-orders' element={<MyOrders reloadTrigger={reloadOrders} />} />
           </Routes>
