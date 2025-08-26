@@ -15,9 +15,8 @@ import axiosInstance from './axiosInstance';
 const API = process.env.REACT_APP_API_BASE_URL;
 
 function App() {
-  const [products, setProducts] = useState([]);
-  const [nextPage, setNextPage] = useState(null);
-  const [prevPage, setPrevPage] = useState(null);
+  const [productsData, setProductsData] = useState({ results: [], count: 0, next: null, previous: null });
+  const DEFAULT_PAGE_SIZE = 12;
   const [reloadOrders, setReloadOrders] = useState(false);
 
   const [cartItems, setCartItems] = useState(() => {
@@ -69,32 +68,22 @@ function App() {
     }
   }
 
-  const loadProducts = async () => {
+  const loadPage = async (page = 1, pageSize = DEFAULT_PAGE_SIZE) => {
     try {
-      const response = await axiosInstance.get(`${API}/products/`);
-      setProducts(response.data);
+      const url = `${API}/products/?page=${page}&page_size=${pageSize}`;
+      const { data } = await axiosInstance.get(url);
+      // Оставляем полный объект DRF: { count, results, next, previous, ... }
+      setProductsData(data);
     } catch (error) {
       console.error('Ошибка загрузки товаров:', error);
     }
   };
 
   useEffect(() => {
-    getProducts().then(data => {
-      if (data) {
-        setProducts(data); // ← Сохраняем ВЕСЬ объект, не только results
-        setNextPage(data.next);
-        setPrevPage(data.previous);
-      }
-    });
+    loadPage(1, DEFAULT_PAGE_SIZE);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  function loadPage(url) {
-    axiosInstance.get(url).then(response => {
-      setProducts(response.data.results);
-      setNextPage(response.data.next);
-      setPrevPage(response.data.previous);
-    });
-  }
 
   return (
     <Router>
@@ -107,8 +96,17 @@ function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/catalog" element={<Catalog />} />
-            <Route path="/login" element={<Login loadProducts={loadProducts} />} />
-            <Route path="/products" element={<Products />} />
+            <Route path="/login" element={<Login loadProducts={() => loadPage(1)} />} />
+            <Route
+              path="/products"
+              element={
+                 <Products
+                  products={productsData}
+                  addToCart={addToCart}
+                  loadPage={loadPage}
+                />
+              }
+            />
             <Route path='/cart' element={<Cart cartItems={cartItems} handleCheckout={handleCheckout} />} />
             <Route path='/my-orders' element={<MyOrders reloadTrigger={reloadOrders} />} />
           </Routes>
