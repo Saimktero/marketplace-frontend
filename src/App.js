@@ -15,7 +15,7 @@ const API = process.env.REACT_APP_API_BASE_URL;
 
 function App() {
   const [productsData, setProductsData] = useState({ results: [], count: 0, next: null, previous: null });
-  const DEFAULT_PAGE_SIZE = 12;
+  const DEFAULT_PAGE_SIZE = 10;
   const [reloadOrders, setReloadOrders] = useState(false);
 
   const [cartItems, setCartItems] = useState(() => {
@@ -111,7 +111,7 @@ function App() {
           </Routes>
         </main>
         <footer>
-          <p>&copy; 2025 Онлайн-маркетплейс</p>
+          <p>&copy; 2026 Онлайн-маркетплейс</p>
         </footer>
       </div>
       <ToastContainer position='top-right' autoClose={3000} />

@@ -3,7 +3,7 @@ import ProductList from "../components/ProductList";
 import Pagination from "../components/Pagination/Pagination";
 
 function Products({ products, addToCart, loadPage }) {
-  const pageSize = 12; 
+  const pageSize = 10; 
   const [currentPage, setCurrentPage] = React.useState(1);
 
   const totalCount = products?.count ?? 0;
