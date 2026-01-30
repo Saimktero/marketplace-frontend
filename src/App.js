@@ -1,6 +1,4 @@
-
-import { useEffect, useState } from 'react';
-import { getProducts } from './api/products';
+import React, { useEffect, useState } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { Home } from './pages/Home';
 import Login from './pages/Login';
@@ -12,9 +10,6 @@ import Products from './pages/Products'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import axiosInstance from './axiosInstance';
-import React, { useState, useMemo } from 'react';
-import Pagination from './components/Pagination/Pagination';
-import data from './data/mock-data.json';
 import './style.scss';
 
 const API = process.env.REACT_APP_API_BASE_URL;
