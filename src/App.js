@@ -15,7 +15,7 @@ const API = process.env.REACT_APP_API_BASE_URL;
 
 function App() {
   const [productsData, setProductsData] = useState({ results: [], count: 0, next: null, previous: null });
-  const DEFAULT_PAGE_SIZE = 10;
+  const PAGE_SIZE = 10;
   const [reloadOrders, setReloadOrders] = useState(false);
 
   const [cartItems, setCartItems] = useState(() => {
@@ -67,9 +67,9 @@ function App() {
     }
   }
 
-  const loadPage = async (page = 1, pageSize = DEFAULT_PAGE_SIZE) => {
+  const loadPage = async (page = 1) => {
     try {
-      const url = `${API}/products/?page=${page}&page_size=${pageSize}`;
+      const url = `${API}/products/?page=${page}&page_size=${PAGE_SIZE}`;
       const { data } = await axiosInstance.get(url);
       // Оставляем полный объект DRF: { count, results, next, previous, ... }
       setProductsData(data);
@@ -79,7 +79,7 @@ function App() {
   };
 
   useEffect(() => {
-    loadPage(1, DEFAULT_PAGE_SIZE);
+    loadPage(1, PAGE_SIZE);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -103,6 +103,7 @@ function App() {
                   products={productsData}
                   addToCart={addToCart}
                   loadPage={loadPage}
+                  pageSize={PAGE_SIZE}
                 />
               }
             />
