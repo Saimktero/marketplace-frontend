@@ -13,7 +13,7 @@ function NavBar() {
   return (
     <nav>
       <Link to='/'>Главная</Link>
-      <Link to='/catalog'>Каталог</Link>
+      <Link to='/products'>Каталог</Link>
       <Link to='/cart'>Корзина</Link>
       {isAuthenticated ? (
       <>

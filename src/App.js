@@ -88,13 +88,9 @@ function App() {
     <Router>
       <NavBar />
       <div>
-        <header>
-          <h1>Маркетплейс</h1>
-        </header>
         <main>
           <Routes>
             <Route path="/" element={<Home />} />
-            <Route path="/catalog" element={<Catalog />} />
             <Route path="/login" element={<Login loadProducts={() => loadPage(1)} />} />
             <Route
               path="/products"
