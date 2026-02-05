@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { Home } from './pages/Home';
 import Login from './pages/Login';
-import Catalog from './pages/Catalog';
 import NavBar from './components/NavBar';
 import Cart from './components/Cart';
 import MyOrders from './components/MyOrders'
