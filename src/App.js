@@ -89,7 +89,7 @@ function App() {
       <div>
         <main>
           <Routes>
-            <Route path="/" element={<Home />} />
+            <Route path="/" element={<Home productsData={productsData} />} />
             <Route path="/login" element={<Login loadProducts={() => loadPage(1)} />} />
             <Route
               path="/products"
