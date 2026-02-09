@@ -15,7 +15,7 @@ export function Home({ productsData }) {
         <section>
             <h2>Популярные товары</h2>
             {popularProducts.length > 0 ? (
-                <ProductList products={popularProducts} />
+                <ProductList products={popularProducts} addToCart={addToCart} />
             ) : (
               <p>Загрузка товаров...</p>
             )}
