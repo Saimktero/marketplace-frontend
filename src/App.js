@@ -99,30 +99,34 @@ function App() {
 
   return (
     <Router>
-      <NavBar />
-        <main>
-          <Routes>
-            <Route path="/" element={<Home popularProducts={homePopular} addToCart={addToCart}/>} />
-            <Route path="/login" element={<Login loadProducts={() => loadPage(1)} />} />
-            <Route
-              path="/products"
-              element={
-                 <Products
-                  products={productsData}
-                  addToCart={addToCart}
-                  loadPage={loadPage}
-                  pageSize={PAGE_SIZE}
-                />
-              }
-            />
-            <Route path='/cart' element={<Cart cartItems={cartItems} handleCheckout={handleCheckout} />} />
-            <Route path='/my-orders' element={<MyOrders reloadTrigger={reloadOrders} />} />
-          </Routes>
-        </main>
-        <footer>
-          <p>&copy; 2026 Онлайн-маркетплейс</p>
-        </footer>
-      <ToastContainer position='top-right' autoClose={3000} />
+      <div className="app">
+        <NavBar />
+
+          <main className="container">
+            <Routes>
+              <Route path="/" element={<Home popularProducts={homePopular} addToCart={addToCart}/>} />
+              <Route path="/login" element={<Login loadProducts={() => loadPage(1)} />} />
+              <Route
+                path="/products"
+                element={
+                  <Products
+                    products={productsData}
+                    addToCart={addToCart}
+                    loadPage={loadPage}
+                    pageSize={PAGE_SIZE}
+                  />
+                }
+              />
+              <Route path='/cart' element={<Cart cartItems={cartItems} handleCheckout={handleCheckout} />} />
+              <Route path='/my-orders' element={<MyOrders reloadTrigger={reloadOrders} />} />
+            </Routes>
+          </main>
+
+          <footer className="footer">
+            <p>&copy; 2026 Онлайн-маркетплейс</p>
+          </footer>
+        <ToastContainer position='top-right' autoClose={3000} />
+      </div>
     </Router>
   );
 }
