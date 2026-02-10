@@ -9,6 +9,8 @@ import Products from './pages/Products'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import axiosInstance from './axiosInstance';
+import './App.css';
+
 
 const API = process.env.REACT_APP_API_BASE_URL;
 
@@ -98,7 +100,6 @@ function App() {
   return (
     <Router>
       <NavBar />
-      <div>
         <main>
           <Routes>
             <Route path="/" element={<Home popularProducts={homePopular} addToCart={addToCart}/>} />
@@ -121,7 +122,6 @@ function App() {
         <footer>
           <p>&copy; 2026 Онлайн-маркетплейс</p>
         </footer>
-      </div>
       <ToastContainer position='top-right' autoClose={3000} />
     </Router>
   );
