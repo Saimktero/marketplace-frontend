@@ -94,9 +94,6 @@ nav {
   border: 1px solid #e5e5e5;
   border-radius: 10px;
   padding: 12px;
-  max-width: 320px;
-  justify-self: center;
-  background: #fff;
 }
 
 .product-card button {
