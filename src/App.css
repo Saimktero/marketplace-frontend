@@ -46,14 +46,6 @@ body {
   line-height: 1.4;
 }
 
-/* =========================
-   Базовая типографика
-========================= */
-main {
-  max-width: 960px;
-  margin: 0 auto;
-  padding: 24px 16px;
-}
 
 /* =========================
    Навигация
@@ -86,14 +78,19 @@ nav {
   padding: 0;
   margin: 12px 0 0;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
   gap: 12px;
+  justify-content: start;
 }
 
 .product-card {
   border: 1px solid #e5e5e5;
   border-radius: 10px;
   padding: 12px;
+  width: 100%;
+  max-width: 320px;   /* не растягивается слишком широко */
+  justify-self: start; /* прижимает карточку к левому краю колонки */
+
 }
 
 .product-card button {
@@ -112,7 +109,8 @@ nav {
 
 .container {
   flex: 1;              /* вот это держит футер внизу */
-  max-width: 960px;
+  width: 100%;
+  max-width: 1100px;
   margin: 0 auto;
   padding: 24px 16px;
 }
