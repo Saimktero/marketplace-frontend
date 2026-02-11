@@ -78,15 +78,16 @@ nav {
   padding: 0;
   margin: 12px 0 0;
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-  gap: 12px;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 20px;
   justify-content: start;
 }
 
 .product-card {
+  background: #fff;
   border: 1px solid #e5e5e5;
   border-radius: 10px;
-  padding: 12px;
+  padding: 16px;
   width: 100%;
   max-width: 280;   /* не растягивается слишком широко */
   justify-self: start; /* прижимает карточку к левому краю колонки */
