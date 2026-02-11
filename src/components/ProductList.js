@@ -5,13 +5,12 @@ function ProductList({ products, addToCart }) {
 
   return (
     <ul className="products-grid">
-      {products.map(product => (
-        <li key={product.id} className="product-card">
+      {products.map((product) => (
           <Product
+            key={product.id}
             name={product.name}
             addToCart={() => addToCart(product)}
           />
-        </li>
       ))}
     </ul>
   );
