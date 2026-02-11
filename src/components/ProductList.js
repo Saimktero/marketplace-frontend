@@ -4,9 +4,9 @@ function ProductList({ products, addToCart }) {
   if (!products || products.length === 0) return <p>Загрузка товаров...</p>;
 
   return (
-    <ul className="products-grid">
+    <ul>
       {products.map(product => (
-        <li key={product.id} className="product-card">
+        <li key={product.id}>
           <Product
             name={product.name}
             addToCart={() => addToCart(product)}
