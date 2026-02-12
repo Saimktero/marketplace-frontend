@@ -78,20 +78,20 @@ nav {
   padding: 0;
   margin: 12px 0 0;
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-  gap: 20px;
-  justify-content: start;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  column-gap: 55px;
+  row-gap: 20px;
+  justify-content: space-between;
 }
 
 .product-card {
   background: #fff;
   border: 1px solid #e5e5e5;
+  width: 100%;
   border-radius: 10px;
   padding: 16px;
-  width: 100%;
   max-width: 280px;   /* не растягивается слишком широко */
-  justify-self: start; /* прижимает карточку к левому краю колонки */
-
+  justify-self: sspace-between; /* прижимает карточку к левому краю колонки */
 }
 
 .product-card button {
@@ -111,7 +111,7 @@ nav {
 .container {
   flex: 1;              /* вот это держит футер внизу */
   width: 100%;
-  max-width: 1100px;
+  max-width: 1200px;
   margin: 0 auto;
   padding: 24px 16px;
 }

@@ -2,7 +2,7 @@ import React from 'react';
 
 function Product({ name, addToCart }) {
   return (
-    <li className="product-card">
+    <li className={"product-card"}>
       <p>{name}</p>
       <button onClick={addToCart}>Добавиь в корзину</button>
     </li>
