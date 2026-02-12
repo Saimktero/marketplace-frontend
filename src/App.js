@@ -9,6 +9,8 @@ import Products from './pages/Products'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import axiosInstance from './axiosInstance';
+import './App.css';
+
 
 const API = process.env.REACT_APP_API_BASE_URL;
 
@@ -16,6 +18,7 @@ function App() {
   const [productsData, setProductsData] = useState({ results: [], count: 0, next: null, previous: null });
   const PAGE_SIZE = 10;
   const [reloadOrders, setReloadOrders] = useState(false);
+  const [homePopular, setHomePopular] = useState([])
 
   const [cartItems, setCartItems] = useState(() => {
     const savedCart = localStorage.getItem('cartItems');
@@ -78,39 +81,52 @@ function App() {
   };
 
   useEffect(() => {
-    loadPage(1, PAGE_SIZE);
+    loadPage(1);
+    loadPopular();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  const loadPopular = async () => {
+    try {
+      const url = `${API}/products/?page=1&page_size=4`;
+      const {data} = await axiosInstance.get(url);
+      setHomePopular(data?.results ?? []);
+    } catch (error) {
+      console.error('Ошибка загрузки популярных товаров:', error);
+    }
+  };
 
 
   return (
     <Router>
-      <NavBar />
-      <div>
-        <main>
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/login" element={<Login loadProducts={() => loadPage(1)} />} />
-            <Route
-              path="/products"
-              element={
-                 <Products
-                  products={productsData}
-                  addToCart={addToCart}
-                  loadPage={loadPage}
-                  pageSize={PAGE_SIZE}
-                />
-              }
-            />
-            <Route path='/cart' element={<Cart cartItems={cartItems} handleCheckout={handleCheckout} />} />
-            <Route path='/my-orders' element={<MyOrders reloadTrigger={reloadOrders} />} />
-          </Routes>
-        </main>
-        <footer>
-          <p>&copy; 2026 Онлайн-маркетплейс</p>
-        </footer>
+      <div className="app">
+        <NavBar />
+
+          <main className="container">
+            <Routes>
+              <Route path="/" element={<Home popularProducts={homePopular} addToCart={addToCart}/>} />
+              <Route path="/login" element={<Login loadProducts={() => loadPage(1)} />} />
+              <Route
+                path="/products"
+                element={
+                  <Products
+                    products={productsData}
+                    addToCart={addToCart}
+                    loadPage={loadPage}
+                    pageSize={PAGE_SIZE}
+                  />
+                }
+              />
+              <Route path='/cart' element={<Cart cartItems={cartItems} handleCheckout={handleCheckout} />} />
+              <Route path='/my-orders' element={<MyOrders reloadTrigger={reloadOrders} />} />
+            </Routes>
+          </main>
+
+          <footer className="footer">
+            <p>&copy; 2026 Онлайн-маркетплейс</p>
+          </footer>
+        <ToastContainer position='top-right' autoClose={3000} />
       </div>
-      <ToastContainer position='top-right' autoClose={3000} />
     </Router>
   );
 }
