@@ -100,7 +100,7 @@ function App() {
   return (
     <Router>
       <div className="app">
-        <NavBar />
+        <NavBar cartItems={cartItems}  />
 
           <main className="container">
             <Routes>
