@@ -2,7 +2,7 @@ import React from "react";
 import ProductList from "../components/ProductList";
 import Pagination from "../components/Pagination/Pagination";
 
-function Products({ products, addToCart, loadPage, pageSize}) {
+function Products({ products, addToCart, loadPage, pageSize, cartItems, increaseQuantity, decreaseQuantity}) {
   const [currentPage, setCurrentPage] = React.useState(1);
 
   const totalCount = products?.count ?? 0;
@@ -16,7 +16,13 @@ function Products({ products, addToCart, loadPage, pageSize}) {
   return (
     <div>
       <h2>Каталог товаров</h2>
-      <ProductList products={products?.results || []} addToCart={addToCart} />
+      <ProductList
+        products={products?.results || []}
+        addToCart={addToCart}
+        cartItems={cartItems}
+        increaseQuantity={increaseQuantity}
+        decreaseQuantity={decreaseQuantity}
+      />
 
       {totalCount > pageSize && (
         <Pagination

@@ -43,9 +43,10 @@ function App() {
       if (response.status === 201) {
         toast.success('Заказ успешно создан');
         setCartItems([]);
+        console.log("Cart cleared");
         setReloadOrders(prev => !prev);
       } else {
-        toast.success('Ошибка при оформлении заказа');
+        toast.error('Ошибка при оформлении заказа');
       }
 
     } catch (error) {
@@ -54,20 +55,53 @@ function App() {
     }
   }
 
-    function addToCart(product) {
-    const existingItem = cartItems.find(item => item.id === product.id);
-    if (existingItem) {
-      setCartItems(prevItems =>
-        prevItems.map(item =>
-          item.id === product.id
-            ?  { ...item, quantity: item.quantity + 1}
-            : item
-        )
-      );
-    } else {
-      setCartItems(prevItems => [ ...prevItems, { ...product, quantity: 1 }]);
-    }
+  /* Добавление товара в корзину */
+  function addToCart(product) {
+  const existingItem = cartItems.find(item => item.id === product.id);
+  if (existingItem) {
+    setCartItems(prevItems =>
+      prevItems.map(item =>
+        item.id === product.id
+          ?  { ...item, quantity: item.quantity + 1}
+          : item
+      )
+    );
+  } else {
+    setCartItems(prevItems => [ ...prevItems, { ...product, quantity: 1 }]);
   }
+  }
+
+  /* Удаляем товар из корзины */
+  const removeItem = (id) => {
+  setCartItems(prev =>
+    prev.filter(item => item.id !== id)
+  );
+};
+
+  /* Увеличиваем количество товаров в корзине */
+  const increaseQuantity = (id) => {
+  setCartItems(prev =>
+    prev.map(item =>
+      item.id === id
+        ? { ...item, quantity: item.quantity + 1 }
+        : item
+    )
+  );
+};
+
+  /* Уменьшаем количество товаров в корзине */
+  const decreaseQuantity = (id) => {
+  setCartItems(prev =>
+    prev
+      .map(item =>
+        item.id === id
+          ? { ...item, quantity: item.quantity - 1 }
+          : item
+      )
+      .filter(item => item.quantity > 0)
+  );
+};
+
 
   const loadPage = async (page = 1) => {
     try {
@@ -104,7 +138,18 @@ function App() {
 
           <main className="container">
             <Routes>
-              <Route path="/" element={<Home popularProducts={homePopular} addToCart={addToCart}/>} />
+              <Route 
+                path="/" 
+                element={
+                  <Home 
+                    popularProducts={homePopular} 
+                    addToCart={addToCart} 
+                    cartItems={cartItems}
+                    increaseQuantity={increaseQuantity}
+                    decreaseQuantity={decreaseQuantity}
+                  />
+                } 
+              />
               <Route path="/login" element={<Login loadProducts={() => loadPage(1)} />} />
               <Route
                 path="/products"
@@ -114,10 +159,15 @@ function App() {
                     addToCart={addToCart}
                     loadPage={loadPage}
                     pageSize={PAGE_SIZE}
+                    cartItems={cartItems}
+                    increaseQuantity={increaseQuantity}
+                    decreaseQuantity={decreaseQuantity}
                   />
                 }
               />
-              <Route path='/cart' element={<Cart cartItems={cartItems} handleCheckout={handleCheckout} />} />
+              <Route path='/cart' element={<Cart cartItems={cartItems} handleCheckout={handleCheckout}
+              increaseQuantity={increaseQuantity} decreaseQuantity={decreaseQuantity} removeItem={removeItem}/>} 
+              />
               <Route path='/my-orders' element={<MyOrders reloadTrigger={reloadOrders} />} />
             </Routes>
           </main>
@@ -132,5 +182,3 @@ function App() {
 }
 
 export default App;
-
-// Для теста

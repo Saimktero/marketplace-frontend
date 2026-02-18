@@ -17,15 +17,15 @@ function NavBar({ cartItems }) {
     <nav>
       <div className="nav-left">
 
-        <NavLink to='/' end className={({ isActive }) => isActive && "active"}>
+        <NavLink to='/' end className={({ isActive }) => isActive ? "active" : undefined}>
           Главная
         </NavLink>
 
-        <NavLink to="/products" className={({ isActive }) => isActive && "active"}>
+        <NavLink to="/products" className={({ isActive }) => isActive ? "active" : undefined}>
           Каталог
         </NavLink>
 
-        <NavLink to='/cart' className={({ isActive }) => isActive && "active"}>
+        <NavLink to='/cart' className={({ isActive }) => isActive ? "active" : undefined}>
           Корзина 
           {totalCount > 0 && (
             <span className="cart-badge">{totalCount}</span>
@@ -37,13 +37,13 @@ function NavBar({ cartItems }) {
       <div className="nav-right">
         {isAuthenticated ? (
         <>
-          <NavLink to='/my-orders' className={({ isActive }) => isActive && "active"}>
+          <NavLink to='/my-orders' className={({ isActive }) => isActive ? "active" : undefined}>
             Мои заказы
           </NavLink>
           <button onClick={handeLogout}>Выйти</button>
         </>
         ) : (
-          <NavLink to='/login' className={({ isActive }) => isActive && "active"}>
+          <NavLink to='/login' className={({ isActive }) => isActive ? "active" : undefined}>
             Войти
           </NavLink>
         )}

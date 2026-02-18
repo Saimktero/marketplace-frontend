@@ -1,7 +1,13 @@
 import { Link } from 'react-router-dom';
 import ProductList from "../components/ProductList";
 
-export function Home({ popularProducts = [], addToCart }) { 
+export function Home({ 
+  popularProducts = [],
+  addToCart,
+  cartItems,
+  increaseQuantity,
+  decreaseQuantity
+ }) { 
     const top4 = popularProducts.slice(0, 4);
 
     return(
@@ -15,7 +21,13 @@ export function Home({ popularProducts = [], addToCart }) {
         <section>
             <h2>Популярные товары</h2>
             {top4.length > 0 ? (
-                <ProductList products={top4} addToCart={addToCart} />
+                <ProductList
+                    products={top4}
+                    addToCart={addToCart}
+                    cartItems={cartItems}
+                    increaseQuantity={increaseQuantity}
+                    decreaseQuantity={decreaseQuantity}
+                />
             ) : (
               <p>Загрузка товаров...</p>
             )}
